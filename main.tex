@@ -1,8 +1,7 @@
 % !TEX encoding = UTF-8 Unicode
 
 \documentclass[12pt,a4j,titlepage]{ltjsarticle}
-\usepackage{semi}
-\usepackage{here}
+\usepackage{sty/semi}
 \usepackage{titlesec}
 
 
@@ -278,6 +277,7 @@ IT人材の不足の解決には，社内人材の育成やアウトソーシン
 
 共通教科情報科は，小・中・高等学校の各教科等の指導を通じて行われる情報教育の中核である．
 よって，中学校の関連する教科等との縦の連携，高等学校の他教科等との横の連携も極めて重要であるとされている．
+\clearpage
 \subsubsection{高校「情報Ⅰ」におけるネットワーク通信の学習内容}
 高校「情報Ⅰ」におけるネットワーク通信の学習は，(D)情報通信ネットワークとデータの活用で行われる．
 (D)情報通信ネットワークとデータの活用のネットワーク通信に関わる学習内容を以下に示す．
@@ -348,31 +348,153 @@ OSI参照モデルとは，ネットワーク通信で利用されるプロト�
 
 \begin{figure}[h]
 \centering
-\includegraphics[clip,width=50mm]{figures/osi.pdf}
-\caption[OSI参照モデルの概略図]{OSI参照モデルの概略図\linebreak}
+\includegraphics[clip,width=70mm]{figures/osi.pdf}
+\caption[OSI参照モデル]{OSI参照モデル\linebreak}
 \label{fig:osi}
 \end{figure}
 
-OSI参照モデルとTCP/IPやイーサネットの構造は対応しているわけではないが，対応づけすることで理解を助けるとして教科書や参考書で利用されている．
-本研究で作成したWeb教材も同様に，OSI参照モデルをTCP/IPの構造に当てはめることでTCP/IPの仕組みが分かりやすくなることを想定している．
+OSI参照モデルとTCP/IPの階層モデルは対応しているわけではないが，対応づけすることで理解を助けるとして教科書や参考書で利用されている．
+本研究で作成したWeb教材も同様に，OSI参照モデルをTCP/IPの構造に当てはめることでTCP/IPの仕組みが分かりやすくなることを想定して作成している．
 \subsection{TCP/IP}
 \subsubsection{概要}
-TCP/IP(Transmission Control Protocol / Internet Protocol)は，
-\subsubsection{データリンク層}
-\subsubsection{インターネット層}
+TCP/IP(Transmission Control Protocol / Internet Protocol)とは，現在のインターネットを含む多くのコンピュータで構成されるネットワークにおいて，世界標準的に利用されている通信プロトコルのセットである．
+インターネットプロトコルスイート(Internet protocol suite)とも呼ばれている．
+TCP/IPは，1970年代初期にアメリカの軍用ネットワーク用の次世代プロトコルの研究から開発され，最初の仕様は1974年に公開された．
+1980年代前半に，TCP/IPを標準サポートしたUnix系のOSが公開され教育・研究機関によりTCP/IPによるネットワークの構築が進み，TCP/IPによる世界的なネットワークをインターネットと呼ぶようになった．
+1991年にWWW(World Wide Web)というインターネット上のコンテンツ同士を結びつけるシステムが公開されwebが普及し始めた．
+webの利用にはTCP/IPを標準サポートしたOSが必要であり，1994年以降にTCP/IPを標準サポートした一般企業・ユーザ向けOSが登場したためTCP/IPが世界的に一気に普及することになった．
+\subsubsection{TCP/IPの階層}
+TCP/IPの階層モデルを図\ref{fig:tcpip_sou}に示す．
+
+\begin{figure}[h]
+\centering
+\includegraphics[clip,width=70mm]{figures/TCPIPmodel.pdf}
+\caption[TCP/IPの階層モデル]{TCP/IPの階層モデル\linebreak}
+\label{fig:tcpip_sou}
+\end{figure}
+
+TCP/IPはOSI参照モデルと同じように、役割を階層に分けている．
+同じ名前の階層もあるが，TCP/IPの階層モデルとOSI参照モデルが完全に対応しているわけでは無い．
+データを送信する際は、上位層から下位層へデータを渡しヘッダを付与していく．
+この仕組みををカプセル化と呼ぶ．
+また，データとヘッダのまとまりをパケットと呼ぶ．
+アプリケーションが通信を行う際は，データを分割しパケットとしてそれぞれカプセル化して送信する．
+パケット送信時のカプセル化の例を図\ref{fig:capu}に示す．
+\clearpage
+\begin{figure}[h]
+\centering
+\includegraphics[clip,width=95mm]{figures/capu.pdf}
+\caption[パケット送信時のカプセル化の概略図]{パケット送信時のカプセル化の概略図\linebreak}
+\label{fig:capu}
+\end{figure}
+
+受信時は送信時とは逆に，図\ref{fig:capu2}に示すように下位層から上位層にヘッダを除去しながらデータを渡していく．
+
+\begin{figure}[h]
+\centering
+\includegraphics[clip,width=95mm]{figures/capu2.pdf}
+\caption[パケット受信時のヘッダ除去の概略図]{パケット受信時のヘッダ除去の概略図\linebreak}
+\label{fig:capu2}
+\end{figure}
+
+\subsection{データリンク層とネットワーク層}
+データリンク層とネットワーク層とは，OSI参照モデルの層である．
+図\ref{fig:kaisou}に示すように，TCP/IPの階層ではインターネット層とネットワークインタフェース層にあたる．
+\\
+\begin{figure}[h]
+\centering
+\includegraphics[clip,width=95mm]{figures/kaisou.pdf}
+\caption[下位層におけるOSI参照モデルとTCP/IPの対応]{下位層におけるOSI参照モデルとTCP/IPの対応\linebreak}
+\label{fig:kaisou}
+\end{figure}
+
+これらの層は，コンピュータ同士のデータ伝送を実現している．
+しかし，ネットワーク層はエンドツーエンド(end-to-end)と呼ばれる終点ノード間の通信を実現し，データリンク層は同じ種類の通信手段で接続されているノード間の通信を実現する．
+つまり，ネットワーク層は始点と終点の通信を，データリンク層は始点と終点の間の1区間ごとの通信を提供する．
+違いを単純化したようすを図に示す．
+
+\begin{figure}[h]
+\centering
+\includegraphics[clip,width=160mm]{figures/data_net.pdf}
+\caption[データリンク層とネットワーク層の違い]{データリンク層とネットワーク層の違い\linebreak}
+\label{fig:data_net}
+\end{figure}
+
+また，ネットワーク層の通信はIPというプロトコルによって宛先をIPアドレスで宛先を識別し，データリンク層は機器が固有に持つMACアドレスで宛先を識別している．
+\clearpage
+\subsubsection{IPアドレス}
+IPアドレスとは，ネットワーク層のプロトコルであるIPで使用するアドレスであり，ネットワークに接続されているすべてのホストの中から通信を行う相手を識別する．
+TCP/IPで通信するすべての機器には必ずIPアドレスを設定する必要がある．
+IPはバージョンによる規格の違いが存在し，現在のネットワークでは「IPv4」と「IPv6」が主に利用されている．
+バージョンによってIPアドレスの長さや表記が異なる．
+「IPv4」と「IPv6」の違いの例を表\ref{table:ipv}に表す．\\
+
+\begin{table}[hbtp]
+  \caption{「IPv4」と「IPv6」の主な違い}
+  \label{table:ipv}
+  \centering
+  \begin{tabular}{|l|c|c|}
+    \hline
+    名称  & 表記方法  &  例  \\
+    \hline
+    \hline 
+    IPv4  & 32ビットを8ビットごとに区切り，10進数  & 192.168.130.10 \\
+    \hline
+    IPv6  & 128ビットを16ビットごとに区切り，16進数 & FEDC:BA98:7896:3210:BA76:AAB4:7654:23B0 \\
+    \hline
+  \end{tabular}
+\end{table}
+アドレスの長さや表記以外にも，ヘッダの構造や拡張機能の有無などの違いがある．
+\subsubsection{MACアドレス}
+MACアドレスとは，直接接続された機器を識別するためのアドレスである．IEEE802.3で規格化されたMACアドレスがイーサネット，無線LAN，Bluetoothなどで利用される．
+IEEE(Institute of Electrical and Electronics Engineers)は，電気・情報工学分野の技術標準化機関であり，IEEE802委員会がLANに関連する規格を定めている．
+MACアドレスは，一般的にコンピュータやルータなどのネットワークインタフェースカードに製造時に割り振られている．
+全世界でMACアドレスが重複しないようになっており，意図的に変更したり仮想環境で設定しない限りは同じMACアドレスは存在しないため，直接接続された機器を識別することができる．
+48ビットを8ビットごとに6つのオクテットに区切り，16進数で表現される．
+\clearpage
 
 \subsection{イーサネット}
 \subsubsection{概要}
+イーサネット(Ethernet)とは，IEEE802.3で規格された通信規格であり，有線LANを構成するために利用される．
+他のLANを構成するための通信規格に比べて，制御の仕組みが単純であったため安価なネットワークインタフェースカードが作られ普及した．
+イーサネットは，OSI参照モデルのデータリンク層と物理層に相当する通信規格である．
+
 \subsubsection{イーサネットフレーム}
+イーサネットフレームとは，イーサネットの通信を行う際に使用するデータのフォーマットのことである．
+図\ref{fig:ether}にデータリンクを流れるパケットとイーサネットフレームの概略図を示す．
+
 \begin{figure}[h]
 \centering
-\includegraphics[clip,width=85mm]{figures/ethernet.pdf}
-\caption[イーサネットフレームの概略図]{イーサネットフレームの概略図\linebreak}
+\includegraphics[clip,width=140mm]{figures/ethernet.pdf}
+\caption[データリンクを流れるパケットとイーサネットフレームの概略図]{データリンクを流れるパケットとイーサネットフレームの概略図\linebreak}
 \label{fig:ether}
 \end{figure}
 
-\subsubsection{IPアドレス}
-\subsubsection{MACアドレス}
+イーサネットフレームの各フィールドの説明を表に表す．
+\\
+\begin{table}[hbtp]
+  \caption{イーサネットフレーム}
+  \label{table:ipv}
+  \centering
+  \begin{tabular}{|l|c|}
+    \hline
+    フィールド名称  & フィールドの説明  \\
+    \hline
+    \hline 
+    プリアンブル  & フレームの始まりを示すビット列 \\
+    \hline 
+    宛先MACアドレス  & 受信側のMACアドレス \\
+    \hline 
+    送信元MACアドレス  &  送信元のMACアドレス\\
+    \hline 
+    イーサネットタイプ  & データのプロトコルを識別する \\
+    \hline 
+    データ  & データリンク層より上位層のヘッダやデータ \\
+    \hline 
+    FCS  & 受信したフレームの破損を確認する \\
+    \hline
+  \end{tabular}
+\end{table}
 
 \clearpage
 
